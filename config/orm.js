@@ -1,35 +1,19 @@
 let connection = require("../config/connection.js");
 
 
+let orm = {
+    selectAll: function () {
 
-function selectAll(){
+    },
+    insertOne: function () {
+
+    },
+
+    updateOne: function () {
+
+    },
 
 }
-
-
-function insertOne(){
-
-}
-
-function updateOne(){
-    
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports = orm;
