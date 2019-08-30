@@ -1,6 +1,6 @@
 let express = require("express");
 let mysql = require("mysql");
-
+let exphbs = require("express-handlebars");
 let app = express();
 var PORT = process.env.PORT || 8080;
 
@@ -10,12 +10,13 @@ app.use(express.static("app/public"))
 
 require("./controllers/burgers_controllers")(app);
 
-module.exports = function (req, res) {
-  app.get("/", function (res, req) {
-    selectAll()
-  }),
-    res.render("index")
-}
+app.engine(
+  "handlebars",
+  exphbs({
+    defaultLayout: "main"
+  })
+);
+app.set("view engine", "handlebars");
 
 
 app.listen(PORT, function () {
