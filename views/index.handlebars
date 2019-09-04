@@ -1,38 +1,52 @@
-<h1>Cats!</h1>
+<h1>Burgers!!</h1>
 
-<h2>Cats that are not sleepy!</h2>
+<h2>Check out our Burgers!</h2>
 
 <ul>
-  {{#each cats}}
-    {{#unless sleepy}}
-      {{> cats/cat-block sleep=true}}
-    {{/unless}}
+  {{#each burgers}}
+  {{#if devoured}}
+  {{else}}
+  <form class="eat-burger" action="/devour">
+    <div class="form-group">
+      <label for="input_burger">{{burger_name}}</label>
+      <input type="submit" id="devoured" name="devoured_id" value={{id}}>
+    </div>
+  </form>
+  {{/if}}
   {{/each}}
 </ul>
 
-<h2>Cats that are sleepy!</h2>
+<h2>That was Tasty!</h2>
 
 <ul>
-  {{#each cats}}
-    {{#if sleepy}}
-      {{> cats/cat-block sleep=false}}
-    {{/if}}
+  {{#each burgers}}
+  {{#if devoured}}
+  {{burger_name}};({{id}})<br>
+  {{/if}}
   {{/each}}
 </ul>
 
-<h2>Add a Cat</h2>
-<form class="create-form">
+<h2>Neeeeext Burger!!!</h2>
+<form class="create-form" action="/add">
 
   <div class="form-group">
-    <label for="ca">Cat Name:</label>
-    <input type="text" id="ca" name="name">
+    <label for="burger_input">Burger Name:</label>
+    <input type="text" id="burger_name" name="burger_input">
   </div>
 
-  <div class="form-group">
-    <label for="sleepy">Sleepy?</label><br>
-    <input type="radio" name="sleepy" value="1" checked> Sleepy!<br>
-    <input type="radio" name="sleepy" value="0"> Awake
-  </div>
+   <button type="submit" id="test">Devour A Burger</button>
+  <script>
+    $('#test').on('click', function (event) {
+      event.preventDefault();
+      console.log('test')
+    });
 
-  <button type="submit" id="test">Add Cat</button>
+    $('.test').on('click', function (event) {
+      console.log($(this).attr('data-name'))
+      event.preventDefault();
+      $.get('api/messages', function (data) {
+        console.log(data)
+      })
+    });
+  </script>
 </form>
